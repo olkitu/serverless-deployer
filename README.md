@@ -9,7 +9,7 @@ Example for
 ```yaml
 deploy:
   stage: deploy
-  image: docker pull ghcr.io/olkitu/serverless-deployer
+  image: ghcr.io/olkitu/serverless-deployer
   script:
   - npm ci
   - serverless deploy --verbose

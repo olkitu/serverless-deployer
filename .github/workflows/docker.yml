@@ -14,8 +14,6 @@ on:
     tags: [ 'v*.*.*' ]
   pull_request:
     branches: [ main ]
-  paths-ignore:
-  - '**/README.md'
 
 env:
   # Use docker.io for Docker Hub if empty

@@ -1,4 +1,4 @@
-FROM node:14.7
+FROM node:14.7-buster-slim
 
 # Install AWS CLI and serverless
 RUN apt-get update && apt-get install -y python3-pip \

@@ -61,24 +61,36 @@ jobs:
 
       # Build and push Docker image with Buildx (don't push on PR)
       # https://github.com/docker/build-push-action
-      - name: Build and push Docker image Alpine
+      - name: Build and push Docker image Alpine with PHP 7
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: alpine/Dockerfile
+          file: alpine-php7/Dockerfile
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ env.REGISTRY }}/${{ github.repository }}:latest
+          tags: ${{ env.REGISTRY }}/${{ github.repository }}:php7.4-alpine,${{ env.REGISTRY }}/${{ github.repository }}:php7-alpine
           labels: ${{ steps.meta.outputs.labels }}
           platforms: linux/amd64,linux/arm/v7,linux/arm64/v8
 
       # Build and push Docker image with Buildx (don't push on PR)
       # https://github.com/docker/build-push-action
-      - name: Build and push Docker image Debian
+      - name: Build and push Docker image Debian Buster
         uses: docker/build-push-action@v2
         with:
           context: .
           file: debian/Dockerfile
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ env.REGISTRY }}/${{ github.repository }}:latest-debian
+          tags: ${{ env.REGISTRY }}/${{ github.repository }}:php7.3-debian,${{ env.REGISTRY }}/${{ github.repository }}:php7-debian,${{ env.REGISTRY }}/${{ github.repository }}:latest-debian
+          labels: ${{ steps.meta.outputs.labels }}
+          platforms: linux/amd64,linux/arm/v7,linux/arm64/v8
+
+      # Build and push Docker image with Buildx (don't push on PR)
+      # https://github.com/docker/build-push-action
+      - name: Build and push Docker image Alpine with PHP 8
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: alpine-php8/Dockerfile
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ${{ env.REGISTRY }}/${{ github.repository }}:php8-alpine,${{ env.REGISTRY }}/${{ github.repository }}:latest
           labels: ${{ steps.meta.outputs.labels }}
           platforms: linux/amd64,linux/arm/v7,linux/arm64/v8

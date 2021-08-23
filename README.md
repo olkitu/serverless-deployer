@@ -20,7 +20,7 @@ Supported arch linux/amd64,linux/arm/v7,linux/arm64/v8 . All images will update 
 Mount from your local home directory AWS directory to container
 
 ```
-docker run --rm -v "$(HOME)/.aws:/home/node/.aws:ro" -v "$(pwd):/app ghcr.io/olkitu/serverless-deployer serverless deploy
+docker run --rm -v "$HOME/.aws:/home/node/.aws:ro" -v "$(pwd):/app" ghcr.io/olkitu/serverless-deployer serverless deploy
 ```
 
 Or give AWS access_keys via environment variables

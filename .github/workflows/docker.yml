@@ -67,7 +67,7 @@ jobs:
           context: .
           file: alpine-php7/Dockerfile
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ env.REGISTRY }}/${{ github.repository }}:php7.4-alpine,${{ env.REGISTRY }}/${{ github.repository }}:php7-alpine
+          tags: ${{ env.REGISTRY }}/${{ github.repository }}:${{github.sha}},${{ env.REGISTRY }}/${{ github.repository }}:php7.4-alpine,${{ env.REGISTRY }}/${{ github.repository }}:php7-alpine
           labels: ${{ steps.meta.outputs.labels }}
           platforms: linux/amd64,linux/arm/v7,linux/arm64/v8
 
@@ -79,7 +79,7 @@ jobs:
           context: .
           file: debian/Dockerfile
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ env.REGISTRY }}/${{ github.repository }}:php7.3-debian,${{ env.REGISTRY }}/${{ github.repository }}:php7-debian,${{ env.REGISTRY }}/${{ github.repository }}:latest-debian
+          tags: ${{ env.REGISTRY }}/${{ github.repository }}:${{github.sha}},${{ env.REGISTRY }}/${{ github.repository }}:php7.3-debian,${{ env.REGISTRY }}/${{ github.repository }}:php7-debian,${{ env.REGISTRY }}/${{ github.repository }}:latest-debian
           labels: ${{ steps.meta.outputs.labels }}
           platforms: linux/amd64,linux/arm/v7,linux/arm64/v8
 
@@ -91,6 +91,6 @@ jobs:
           context: .
           file: alpine-php8/Dockerfile
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ env.REGISTRY }}/${{ github.repository }}:php8-alpine,${{ env.REGISTRY }}/${{ github.repository }}:latest
+          tags: ${{ env.REGISTRY }}/${{ github.repository }}:${{github.sha}},${{ env.REGISTRY }}/${{ github.repository }}:php8-alpine,${{ env.REGISTRY }}/${{ github.repository }}:latest
           labels: ${{ steps.meta.outputs.labels }}
           platforms: linux/amd64,linux/arm/v7,linux/arm64/v8

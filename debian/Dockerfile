@@ -4,3 +4,5 @@ FROM node:14.17-buster-slim
 RUN apt-get update && apt-get install -y python3-pip php-cli php-zip php-gd php-json php-xml \
     && pip3 install awscli \
     && npm install -g serverless
+
+WORKDIR /app

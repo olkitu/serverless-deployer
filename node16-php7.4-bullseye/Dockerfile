@@ -15,6 +15,8 @@ COPY --from=php-image /usr/local/bin/docker-php-source /usr/local/bin/docker-php
 COPY --from=php-image /usr/local/lib/php /usr/local/lib/php
 COPY --from=php-image /usr/local/php /usr/local/php
 
+COPY scripts/* /usr/local/bin/
+
 # Install AWS CLI and Serverless
 RUN Arch="$(uname -m)" \
     && PHP_REQUIRED_LIBS="libmcrypt4 libxml2 libzip4 libargon2-0 libreadline8 libsqlite3-0 libsodium23" \

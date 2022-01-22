@@ -61,36 +61,36 @@ jobs:
 
       # Build and push Docker image with Buildx (don't push on PR)
       # https://github.com/docker/build-push-action
-      - name: Build and push Docker image Alpine with PHP 7
+      - name: Build and push Docker image Node 16 & PHP 7.4
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: alpine-php7/Dockerfile
+          file: node16-php7.4-bullseye/Dockerfile
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ env.REGISTRY }}/${{ github.repository }}:${{github.sha}},${{ env.REGISTRY }}/${{ github.repository }}:php7.4-alpine,${{ env.REGISTRY }}/${{ github.repository }}:php7-alpine
+          tags: ${{ env.REGISTRY }}/${{ github.repository }}:${{github.sha}},${{ env.REGISTRY }}/${{ github.repository }}:node16-php7.4-bullseye,${{ env.REGISTRY }}/${{ github.repository }}:node16-php7-bullseye,/${{ github.repository }}:node16-php7
           labels: ${{ steps.meta.outputs.labels }}
           platforms: linux/amd64,linux/arm/v7,linux/arm64/v8
 
       # Build and push Docker image with Buildx (don't push on PR)
       # https://github.com/docker/build-push-action
-      - name: Build and push Docker image Debian Buster
+      - name: Build and push Docker image Node 16 & PHP 8.0
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: debian/Dockerfile
+          file: node16-php8.0-bullseye/Dockerfile
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ env.REGISTRY }}/${{ github.repository }}:${{github.sha}},${{ env.REGISTRY }}/${{ github.repository }}:php7.3-debian,${{ env.REGISTRY }}/${{ github.repository }}:php7-debian,${{ env.REGISTRY }}/${{ github.repository }}:latest-debian
+          tags: ${{ env.REGISTRY }}/${{ github.repository }}:${{github.sha}},${{ env.REGISTRY }}/${{ github.repository }}:node16-php8.0-bullseye,${{ env.REGISTRY }},${{ env.REGISTRY }}/${{ github.repository }}:node16-php8.0
           labels: ${{ steps.meta.outputs.labels }}
           platforms: linux/amd64,linux/arm/v7,linux/arm64/v8
 
       # Build and push Docker image with Buildx (don't push on PR)
       # https://github.com/docker/build-push-action
-      - name: Build and push Docker image Alpine with PHP 8
+      - name: Build and push Docker image Node 16 & PHP 8.1
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: alpine-php8/Dockerfile
+          file: node16-php7.4-bullseye/Dockerfile
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ env.REGISTRY }}/${{ github.repository }}:${{github.sha}},${{ env.REGISTRY }}/${{ github.repository }}:php8-alpine,${{ env.REGISTRY }}/${{ github.repository }}:latest
+          tags: ${{ env.REGISTRY }}/${{ github.repository }}:${{github.sha}},${{ env.REGISTRY }}/${{ github.repository }}:node16-php8.1-bullseye,${{ env.REGISTRY }},${{ env.REGISTRY }}/${{ github.repository }}:node16-php8,${{ env.REGISTRY }}/${{ github.repository }}:node16-php8.1,${{ env.REGISTRY }}/${{ github.repository }}:latest
           labels: ${{ steps.meta.outputs.labels }}
           platforms: linux/amd64,linux/arm/v7,linux/arm64/v8

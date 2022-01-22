@@ -67,7 +67,7 @@ jobs:
           context: .
           file: node16-php7.4-bullseye/Dockerfile
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ env.REGISTRY }}/${{ github.repository }}:${{github.sha}},${{ env.REGISTRY }}/${{ github.repository }}:node16-php7.4-bullseye,${{ env.REGISTRY }}/${{ github.repository }}:node16-php7-bullseye,${{ env.REGISTRY }}//${{ github.repository }}:node16-php7
+          tags: ${{ env.REGISTRY }}/${{ github.repository }}:${{github.sha}},${{ env.REGISTRY }}/${{ github.repository }}:node16-php7.4-bullseye,${{ env.REGISTRY }}/${{ github.repository }}:node16-php7-bullseye,${{ env.REGISTRY }}/${{ github.repository }}:node16-php7
           labels: ${{ steps.meta.outputs.labels }}
           platforms: linux/amd64,linux/arm/v7,linux/arm64/v8
 

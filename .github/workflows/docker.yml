@@ -89,7 +89,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: node16-php7.4-bullseye/Dockerfile
+          file: node16-php8.1-bullseye/Dockerfile
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ env.REGISTRY }}/${{ github.repository }}:${{github.sha}},${{ env.REGISTRY }}/${{ github.repository }}:node16-php8.1-bullseye,${{ env.REGISTRY }}/${{ github.repository }}:node16-php8,${{ env.REGISTRY }}/${{ github.repository }}:node16-php8.1,${{ env.REGISTRY }}/${{ github.repository }}:latest
           labels: ${{ steps.meta.outputs.labels }}

@@ -13,7 +13,7 @@ Serverless deployer images to run in Gitlab CI to deploy to AWS environment.
 * Node 16 LTS & PHP 8.0: `node16-php8.0`, `node16-php8.0-bullseye`
 * Node 16 LTS & PHP 7.4: `node16-php7`, `node16-php7.4`, `node16-php7.4-bullseye`
 
-Supported arch's are linux/amd64,linux/arm/v7,linux/arm64/v8 . All supported images will update weekly automatically.
+Supported arch's are linux/amd64,linux/arm64/v8 . All supported images will update weekly automatically.
 
 ## Usage
 

@@ -8,6 +8,8 @@ RUN BUILD_PACKAGES='libmcrypt-dev libxml2-dev libonig-dev libzip-dev' \
 
 FROM node:16-bullseye-slim
 
+LABEL fi.truong.image.tag=node16-php8.0-bullseye
+
 # Copy PHP files from php-image
 COPY --from=php-image /usr/local/bin/php /usr/local/bin/php
 COPY --from=php-image /usr/local/etc/php /usr/local/etc/php

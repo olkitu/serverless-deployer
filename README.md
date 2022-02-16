@@ -2,7 +2,7 @@
 
 Serverless deployer images to run in Gitlab CI to deploy to AWS environment.
 
-* Node 16
+* Node 14 or 16
 * PHP 7.4, 8.0 or 8.1
 * AWS-CLI v2
 * Serverless

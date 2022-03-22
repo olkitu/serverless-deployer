@@ -22,7 +22,7 @@ COPY scripts/* /usr/local/bin/
 # Install AWS CLI and Serverless
 RUN Arch="$(uname -m)" \
     && PHP_REQUIRED_LIBS="libmcrypt4 libxml2 libzip4 libargon2-0 libreadline8 libsqlite3-0 libsodium23" \
-    && apt-get update && apt-get install -y jq curl unzip python3-pip $PHP_REQUIRED_LIBS \
+    && apt-get update && apt-get install -y jq curl unzip python3-pip make $PHP_REQUIRED_LIBS \
     && pip3 --no-cache-dir install yq \
     && npm install -g serverless \
     && cd /tmp && curl -s "https://awscli.amazonaws.com/awscli-exe-linux-${Arch}.zip" -o "awscliv2.zip" \

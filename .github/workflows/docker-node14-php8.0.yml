@@ -1,4 +1,4 @@
-name: Build Node 16 Docker imagges
+name: Build Node 14 PHP 8.0 image
 
 # This workflow uses actions that are not certified by GitHub.
 # They are provided by a third-party and are governed by
@@ -61,36 +61,13 @@ jobs:
 
       # Build and push Docker image with Buildx (don't push on PR)
       # https://github.com/docker/build-push-action
-      - name: Build and push Docker image Node 16 & PHP 7.4
+      - name: Build and push Docker image Node 14 & PHP 8.0
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: node16-php7.4-bullseye/Dockerfile
+          file: node14-php8.0-bullseye/Dockerfile
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ env.REGISTRY }}/${{ github.repository }}:node16-php7.4-bullseye,${{ env.REGISTRY }}/${{ github.repository }}:node16-php7-bullseye,${{ env.REGISTRY }}/${{ github.repository }}:node16-php7.4,${{ env.REGISTRY }}/${{ github.repository }}:node16-php7
+          tags: ${{ env.REGISTRY }}/${{ github.repository }}:node14-php8.0-bullseye,${{ env.REGISTRY }}/${{ github.repository }}:node14-php8.0
           labels: ${{ steps.meta.outputs.labels }}
           platforms: linux/amd64,linux/arm64/v8
-
-      # Build and push Docker image with Buildx (don't push on PR)
-      # https://github.com/docker/build-push-action
-      - name: Build and push Docker image Node 16 & PHP 8.0
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          file: node16-php8.0-bullseye/Dockerfile
-          push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ env.REGISTRY }}/${{ github.repository }}:node16-php8.0-bullseye,${{ env.REGISTRY }}/${{ github.repository }}:node16-php8.0
-          labels: ${{ steps.meta.outputs.labels }}
-          platforms: linux/amd64,linux/arm64/v8
-
-      # Build and push Docker image with Buildx (don't push on PR)
-      # https://github.com/docker/build-push-action
-      - name: Build and push Docker image Node 16 & PHP 8.1
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          file: node16-php8.1-bullseye/Dockerfile
-          push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ env.REGISTRY }}/${{ github.repository }}:node16-php8.1-bullseye,${{ env.REGISTRY }}/${{ github.repository }}:node16-php8,${{ env.REGISTRY }}/${{ github.repository }}:node16-php8.1,${{ env.REGISTRY }}/${{ github.repository }}:latest
-          labels: ${{ steps.meta.outputs.labels }}
-          platforms: linux/amd64,linux/arm64/v8
+          cache-from: type=registry,ref=ref=${{ env.REGISTRY }}/${{ github.repository }}:node14-php8.0-bullseye

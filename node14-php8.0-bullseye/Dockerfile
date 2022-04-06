@@ -44,6 +44,8 @@ COPY --from=python:3.9-slim-bullseye /usr/local/lib/libpython3.so /usr/local/lib
 COPY --from=python:3.9-slim-bullseye /usr/local/bin/python /usr/local/bin/python
 COPY --from=python:3.9-slim-bullseye /usr/local/bin/pip3 /usr/local/bin/pip3
 
+COPY --from=composer /usr/bin/composer /usr/bin/composer
+
 COPY scripts/* /usr/local/bin/
 
 # Install AWS CLI and Serverless

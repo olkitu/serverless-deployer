@@ -2,7 +2,9 @@ FROM php:8.1-cli as php-image
 
 RUN BUILD_PACKAGES='libmcrypt-dev libxml2-dev libonig-dev libzip-dev exiftool libpng-dev' \ 
     && apt-get update && apt-get install -y $BUILD_PACKAGES \
+    && pecl install mongodb \
     && docker-php-ext-install -j$(nproc) mysqli pdo pdo_mysql xml pcntl mbstring zip gd exif \
+    && docker-php-ext-enable mongodb \
     && apt-get purge -y $BUILD_PACKAGES \
     && rm -rf /var/lib/apt/lists/*
 

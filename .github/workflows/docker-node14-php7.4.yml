@@ -58,6 +58,14 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      -
+        name: Login to DockerHub
+        if: github.event_name != 'pull_request'
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
       # Extract metadata (tags, labels) for Docker
       # https://github.com/docker/metadata-action
       - name: Extract Docker metadata
@@ -74,7 +82,15 @@ jobs:
           context: .
           file: node14-php7.4-bullseye/Dockerfile
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ env.REGISTRY }}/${{ github.repository }}:${{ steps.image-tags.outputs.sha }},${{ env.REGISTRY }}/${{ github.repository }}:node14-php7.4-bullseye,${{ env.REGISTRY }}/${{ github.repository }}:node14-php7-bullseye,${{ env.REGISTRY }}/${{ github.repository }}:node14-php7.4,${{ env.REGISTRY }}/${{ github.repository }}:node14-php7
+          tags: |
+            ${{ github.repository }}:node14-php7.4-bullseye
+            ${{ github.repository }}:node14-php7-bullseye
+            ${{ github.repository }}:node14-php7.4
+            ${{ github.repository }}:node14-php7
+            ${{ env.REGISTRY }}/${{ github.repository }}:node14-php7.4-bullseye
+            ${{ env.REGISTRY }}/${{ github.repository }}:node14-php7-bullseye
+            ${{ env.REGISTRY }}/${{ github.repository }}:node14-php7.4
+            ${{ env.REGISTRY }}/${{ github.repository }}:node14-php7
           labels: ${{ steps.meta.outputs.labels }}
           platforms: linux/amd64,linux/arm64/v8
           #cache-from: type=registry,ref=ref=${{ env.REGISTRY }}/${{ github.repository }}:node14-php7.4-bullseye

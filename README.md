@@ -37,7 +37,7 @@ Or give AWS access_keys via environment variables
 
 ### Gitlab CI
 
-Example for
+Example
 
 ```yaml
 deploy:

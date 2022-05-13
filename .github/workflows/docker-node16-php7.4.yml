@@ -87,6 +87,10 @@ jobs:
             ${{ github.repository }}:node16-php7-bullseye
             ${{ github.repository }}:node16-php7.4
             ${{ github.repository }}:node16-php7
+            ${{ env.REGISTRY }}/${{ github.repository }}:node16-php7.4-bullseye
+            ${{ env.REGISTRY }}/${{ github.repository }}:node16-php7-bullseye
+            ${{ env.REGISTRY }}/${{ github.repository }}:node16-php7.4
+            ${{ env.REGISTRY }}/${{ github.repository }}:node16-php7
           labels: ${{ steps.meta.outputs.labels }}
           platforms: linux/amd64,linux/arm64/v8
           #cache-from: type=registry,ref=ref=${{ env.REGISTRY }}/${{ github.repository }}:node16-php7.4-bullseye

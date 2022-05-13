@@ -86,6 +86,9 @@ jobs:
             ${{ github.repository }}:node14-php8.1-bullseye
             ${{ github.repository }}:node14-php8
             ${{ github.repository }}:node14-php8.1
+            ${{ env.REGISTRY }}/${{ github.repository }}:node14-php8.1-bullseye
+            ${{ env.REGISTRY }}/${{ github.repository }}:node14-php8
+            ${{ env.REGISTRY }}/${{ github.repository }}:node14-php8.1
           labels: ${{ steps.meta.outputs.labels }}
           platforms: linux/amd64,linux/arm64/v8
           #cache-from: type=registry,ref=ref=${{ env.REGISTRY }}/${{ github.repository }}:node14-php8.1-bullseye

@@ -42,18 +42,29 @@ COPY --from=python:3.9-slim-bullseye /usr/local/bin/python3.9-config /usr/local/
 COPY --from=python:3.9-slim-bullseye /usr/local/lib/python3.9 /usr/local/lib/python3.9
 COPY --from=python:3.9-slim-bullseye /usr/local/bin/pip3.9 /usr/local/bin/pip3.9
 COPY --from=python:3.9-slim-bullseye /usr/local/lib/libpython3.9.so.1.0 /usr/local/lib/libpython3.9.so.1.0
-# Copy Python default version 3.9
-COPY --from=python:3.9-slim-bullseye /usr/local/lib/libpython3.so /usr/local/lib/libpython3.so
-COPY --from=python:3.9-slim-bullseye /usr/local/bin/python /usr/local/bin/python
-COPY --from=python:3.9-slim-bullseye /usr/local/bin/pip3 /usr/local/bin/pip3
+
+# Copy Python 3.10
+COPY --from=python:3.10-slim-bullseye /usr/local/bin/python3.10 /usr/local/bin/python3.10 
+COPY --from=python:3.10-slim-bullseye /usr/local/bin/python3.10-config /usr/local/bin/python3.10-config
+COPY --from=python:3.10-slim-bullseye /usr/local/lib/python3.10 /usr/local/lib/python3.10
+COPY --from=python:3.10-slim-bullseye /usr/local/bin/pip3.10 /usr/local/bin/pip3.10
+COPY --from=python:3.10-slim-bullseye /usr/local/lib/libpython3.10.so.1.0 /usr/local/lib/libpython3.10.so.1.0
+
+# Copy Python default version 3.10
+COPY --from=python:3.10-slim-bullseye /usr/local/lib/libpython3.so /usr/local/lib/libpython3.so
+COPY --from=python:3.10-slim-bullseye /usr/local/bin/python /usr/local/bin/python
+COPY --from=python:3.10-slim-bullseye /usr/local/bin/pip3 /usr/local/bin/pip3
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
+# Copy Docker binaries
+COPY --from=docker:20.10 /usr/local/bin /usr/local/bin
+COPY --from=docker:20.10 /usr/libexec/docker /usr/libexec/docker
+
 COPY scripts/* /usr/local/bin/
 
-# Install AWS CLI and Serverless
 RUN Arch="$(uname -m)" \
-    && PHP_REQUIRED_LIBS="libmcrypt4 libxml2 libzip4 libargon2-0 libreadline8 libsqlite3-0 libsodium23 exiftool libpng-dev" \
+    && PHP_REQUIRED_LIBS="libmcrypt4 libxml2 libzip4 libargon2-0 libreadline8 libsqlite3-0 libsodium23 exiftool libpng-dev libncurses5-dev libedit-dev" \
     && PYTHON_REQUIRED_LIBS="libexpat1" \
     && apt-get update && apt-get install -y jq curl unzip make $PHP_REQUIRED_LIBS $PYTHON_REQUIRED_LIBS \
     && pip3 --no-cache-dir install yq aws-sam-cli cfn-lint cfn-lint-serverless \
@@ -62,6 +73,17 @@ RUN Arch="$(uname -m)" \
     && unzip -q awscliv2.zip \
     && ./aws/install \
     && rm -rf /tmp/* \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
+    && php -v \ 
+    && aws --version \
+    && serverless --version \
+    && python3.7 --version \
+    && python3.8 --version \
+    && python3.9 --version \
+    && python --version \
+    && dockerd --version \
+    && docker --version \
+    && docker buildx version \
+    && docker-compose version
 
 WORKDIR /app

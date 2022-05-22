@@ -4,9 +4,10 @@ Serverless deployer images to run in Gitlab CI to deploy to AWS environment.
 
 * Node 14 or 16
 * PHP 7.4, 8.0 or 8.1
-* Python 3.7, 3.8 and 3.9. 3.9 is default.
-* AWS-CLI v2
+* Python 3.7, 3.8 and 3.9. 3.9, 3.10 is default.
+* AWS-CLI v2, AWS-SAM CLI
 * Serverless
+* Docker
 
 ## Supported Tags
 

@@ -84,7 +84,6 @@ RUN Arch="$(uname -m)" \
     && python3.8 --version \
     && python3.9 --version \
     && python --version \
-    && dockerd --version \
     && docker --version \
     && docker buildx version \
     && docker-compose version

@@ -1,10 +1,11 @@
 FROM php:8.0-cli as php-image
 
-RUN BUILD_PACKAGES='libmcrypt-dev libxml2-dev libonig-dev libzip-dev exiftool libjpeg-dev libpng-dev libgd-dev' \ 
+RUN BUILD_PACKAGES='libmcrypt-dev libxml2-dev libonig-dev libzip-dev exiftool libjpeg-dev libpng-dev libgd-dev libicu-dev' \
     && apt-get update && apt-get install -y $BUILD_PACKAGES \
     && pecl install mongodb \
     && docker-php-ext-configure gd --enable-gd --with-freetype --with-jpeg \
-    && docker-php-ext-install -j$(nproc) mysqli pdo pdo_mysql tokenizer xml pcntl mbstring zip exif gd soap \
+    && docker-php-ext-configure intl \
+    && docker-php-ext-install -j$(nproc) intl mysqli pdo pdo_mysql tokenizer xml pcntl mbstring zip exif gd soap \
     && docker-php-ext-enable mongodb \
     && apt-get purge -y $BUILD_PACKAGES \
     && rm -rf /var/lib/apt/lists/*
@@ -76,7 +77,7 @@ RUN Arch="$(uname -m)" \
     && ./aws/install \
     && rm -rf /tmp/* \
     && rm -rf /var/lib/apt/lists/* \
-    && php -v \ 
+    && php -v \
     && aws --version \
     && serverless --version \
     && python3.7 --version \

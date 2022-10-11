@@ -5,7 +5,7 @@ RUN BUILD_PACKAGES='libmcrypt-dev libxml2-dev libonig-dev libzip-dev exiftool li
     && pecl install mongodb \
     && docker-php-ext-configure gd --enable-gd --with-freetype --with-jpeg \
     && docker-php-ext-configure intl \
-    && docker-php-ext-install -j$(nproc) intl mysqli pdo pdo_mysql xml pcntl mbstring zip gd exif soap \
+    && docker-php-ext-install -j$(nproc) intl mysqli pdo pdo_mysql xml pcntl mbstring zip gd exif soap bcmath \
     && docker-php-ext-enable mongodb \
     && apt-get purge -y $BUILD_PACKAGES \
     && rm -rf /var/lib/apt/lists/*

@@ -65,7 +65,7 @@ COPY --from=docker:20.10 /usr/libexec/docker /usr/libexec/docker
 COPY scripts/* /usr/local/bin/
 
 RUN Arch="$(uname -m)" \
-    && PHP_REQUIRED_LIBS="libmcrypt4 libxml2 libzip4 libargon2-0 libreadline8 libsqlite3-0 libsodium23 exiftool libpng-dev libncurses5-dev libedit-dev" \
+    && PHP_REQUIRED_LIBS="libmcrypt4 libxml2 libzip4 libargon2-0 libreadline8 libsqlite3-0 libsodium23 exiftool libpng-dev libncurses5-dev libedit-dev libxslt1.1" \
     && PYTHON_REQUIRED_LIBS="libexpat1" \
     && apt-get update && apt-get install -y jq curl unzip make $PHP_REQUIRED_LIBS $PYTHON_REQUIRED_LIBS \
     && pip3 --no-cache-dir install yq aws-sam-cli cfn-lint cfn-lint-serverless \

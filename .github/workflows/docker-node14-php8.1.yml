@@ -30,6 +30,11 @@ jobs:
       contents: read
       packages: write
 
+    strategy:
+      matrix:
+        arch: [linux/amd64,linux/arm64/v8]
+        node_version: [14,16,18]
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -76,19 +81,19 @@ jobs:
 
       # Build and push Docker image with Buildx (don't push on PR)
       # https://github.com/docker/build-push-action
-      - name: Build and push Docker image Node 14 & PHP 8.1
+      - name: Build and push Docker image Node ${{ matrix.node_version }} & PHP 8.1
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: node14-php8.1-bullseye/Dockerfile
+          file: php8.1-bullseye/Dockerfile
           push: ${{ github.event_name != 'pull_request' }}
           tags: |
-            ${{ github.repository }}:node14-php8.1-bullseye
-            ${{ github.repository }}:node14-php8
-            ${{ github.repository }}:node14-php8.1
-            ${{ env.REGISTRY }}/${{ github.repository }}:node14-php8.1-bullseye
-            ${{ env.REGISTRY }}/${{ github.repository }}:node14-php8
-            ${{ env.REGISTRY }}/${{ github.repository }}:node14-php8.1
+            ${{ github.repository }}:node${{ matrix.node_version }}-php8.1-bullseye
+            ${{ github.repository }}:node${{ matrix.node_version }}-php8
+            ${{ github.repository }}:node${{ matrix.node_version }}-php8.1
+            ${{ env.REGISTRY }}/${{ github.repository }}:node${{ matrix.node_version }}-php8.1-bullseye
+            ${{ env.REGISTRY }}/${{ github.repository }}:node${{ matrix.node_version }}-php8
+            ${{ env.REGISTRY }}/${{ github.repository }}:node${{ matrix.node_version }}-php8.1
           labels: ${{ steps.meta.outputs.labels }}
-          platforms: linux/amd64,linux/arm64/v8
+          platforms: ${{ matrix.arch }}
           #cache-from: type=registry,ref=ref=${{ env.REGISTRY }}/${{ github.repository }}:node14-php8.1-bullseye

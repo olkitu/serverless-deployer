@@ -2,7 +2,7 @@
 
 Serverless deployer images to run in Gitlab CI to deploy to AWS environment.
 
-* Node 14 or 16
+* Node 14, 16, 18
 * PHP 7.4, 8.0 or 8.1
 * Python 3.7, 3.8 and 3.9. 3.9, 3.10 is default.
 * AWS-CLI v2, AWS-SAM CLI
@@ -11,6 +11,9 @@ Serverless deployer images to run in Gitlab CI to deploy to AWS environment.
 
 ## Supported Tags
 
+* Node 18 LTS & PHP 8.1: `node18-php8`, `node18-php8.1`, `node18-php8.1-bullseye`
+* Node 18 LTS & PHP 8.0: `node18-php8.0`, `node18-php8.0-bullseye`
+* Node 18 & PHP 7.4: `node18-php7`, `node18-php7.4`, `node18-php7.4-bullseye`
 * Node 16 LTS & PHP 8.1: `latest`, `node16-php8`, `node16-php8.1`, `node16-php8.1-bullseye`
 * Node 16 LTS & PHP 8.0: `node16-php8.0`, `node16-php8.0-bullseye`
 * Node 16 LTS & PHP 7.4: `node16-php7`, `node16-php7.4`, `node16-php7.4-bullseye`

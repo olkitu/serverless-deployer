@@ -99,8 +99,9 @@ jobs:
           #cache-from: type=registry,ref=ref=${{ env.REGISTRY }}/${{ github.repository }}:node14-php8.1-bullseye
 
       - name: Push latest
-        if: matrix.node_version == '18'
+        if: (matrix.node_version == '18') && (github.event_name != 'pull_request')
         run: |
+          docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:node${{ matrix.node_version }}-php8
           docker tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:node${{ matrix.node_version }}-php8 ${{ env.IMAGE_NAME }}:latest
           docker tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:node${{ matrix.node_version }}-php8 ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
           docker push ${{ env.IMAGE_NAME }}:latest

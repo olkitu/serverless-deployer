@@ -30,6 +30,10 @@ jobs:
       contents: read
       packages: write
 
+    strategy:
+      matrix:
+        arch: [linux/amd64,linux/arm64/v8]
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -92,5 +96,5 @@ jobs:
             ${{ env.REGISTRY }}/${{ github.repository }}:node14-php7.4
             ${{ env.REGISTRY }}/${{ github.repository }}:node14-php7
           labels: ${{ steps.meta.outputs.labels }}
-          platforms: linux/amd64,linux/arm64/v8
+          platforms: ${{ matrix.arch }}
           #cache-from: type=registry,ref=ref=${{ env.REGISTRY }}/${{ github.repository }}:node14-php7.4-bullseye

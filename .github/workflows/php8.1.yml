@@ -101,8 +101,7 @@ jobs:
       - name: Push latest
         if: matrix.node_version == '18'
         run: |
-          docker pull ${{ env.REGISTRY }}/${{ github.repository }}:node${{ matrix.node_version }}-php8
-          docker tag ${{ env.REGISTRY }}/${{ github.repository }}:node${{ matrix.node_version }}-php8 ${{ github.repository }}:latest
-          docker tag ${{ env.REGISTRY }}/${{ github.repository }}:node${{ matrix.node_version }}-php8 ${{ env.REGISTRY }}/${{ github.repository }}:latest
-          docker push ${{ github.repository }}:latest
-          docker push ${{ env.REGISTRY }}/${{ github.repository }}:latest
+          docker tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:node${{ matrix.node_version }}-php8 ${{ env.IMAGE_NAME }}:latest
+          docker tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:node${{ matrix.node_version }}-php8 ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+          docker push ${{ env.IMAGE_NAME }}:latest
+          docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest

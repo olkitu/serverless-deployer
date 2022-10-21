@@ -85,6 +85,7 @@ jobs:
         with:
           context: .
           file: php8.1-bullseye/Dockerfile
+          build-args: "NODE_VERSION=${{ matrix.node_version }}"
           push: ${{ github.event_name != 'pull_request' }}
           tags: |
             ${{ github.repository }}:node${{ matrix.node_version }}-php8.1-bullseye

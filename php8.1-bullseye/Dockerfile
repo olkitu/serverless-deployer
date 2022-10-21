@@ -10,9 +10,9 @@ RUN BUILD_PACKAGES='libmcrypt-dev libxml2-dev libonig-dev libzip-dev exiftool li
     && apt-get purge -y $BUILD_PACKAGES \
     && rm -rf /var/lib/apt/lists/*
 
-FROM node:14-bullseye-slim
+FROM node:${NODE_VERSION}-bullseye-slim
 
-LABEL fi.truong.image.tag=node14-php8.1-bullseye
+LABEL fi.truong.image.tag=node${NODE_VERSION}-php8.1-bullseye
 
 # Copy PHP files from php-image
 COPY --from=php-image /usr/local/bin/php /usr/local/bin/php

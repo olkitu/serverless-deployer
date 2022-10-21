@@ -1,4 +1,4 @@
-name: Build 7.4 image
+name: Build PHP 7.4 image
 
 # This workflow uses actions that are not certified by GitHub.
 # They are provided by a third-party and are governed by
@@ -32,7 +32,6 @@ jobs:
 
     strategy:
       matrix:
-        arch: [linux/amd64,linux/arm64/v8]
         node_version: [14,16,18]
 
     steps:
@@ -98,5 +97,5 @@ jobs:
             ${{ env.REGISTRY }}/${{ github.repository }}:node${{ matrix.node_version }}-php7.4
             ${{ env.REGISTRY }}/${{ github.repository }}:node${{ matrix.node_version }}-php7
           labels: ${{ steps.meta.outputs.labels }}
-          platforms: ${{ matrix.arch }}
+          platforms: linux/amd64,linux/arm64/v8
         

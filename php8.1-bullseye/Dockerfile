@@ -1,3 +1,5 @@
+ARG ARG NODE_VERSION
+
 FROM php:8.1-cli as php-image
 
 RUN BUILD_PACKAGES='libmcrypt-dev libxml2-dev libonig-dev libzip-dev exiftool libjpeg-dev libpng-dev libgd-dev libicu-dev libxslt1-dev' \

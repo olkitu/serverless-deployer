@@ -1,4 +1,4 @@
-name: Build PHP 8.1 image
+name: Build PHP 8.2 image
 
 # This workflow uses actions that are not certified by GitHub.
 # They are provided by a third-party and are governed by
@@ -80,18 +80,28 @@ jobs:
 
       # Build and push Docker image with Buildx (don't push on PR)
       # https://github.com/docker/build-push-action
-      - name: Build and push Docker image Node ${{ matrix.node_version }} & PHP 8.1
+      - name: Build and push Docker image Node ${{ matrix.node_version }} & PHP 8.2
         uses: docker/build-push-action@v3
         with:
           context: .
-          file: php8.1-bullseye/Dockerfile
+          file: php8.2-bullseye/Dockerfile
           build-args: "NODE_VERSION=${{ matrix.node_version }}"
           push: ${{ github.event_name != 'pull_request' }}
           tags: |
-            ${{ github.repository }}:node${{ matrix.node_version }}-php8.1-bullseye
-            ${{ github.repository }}:node${{ matrix.node_version }}-php8.1
-            ${{ env.REGISTRY }}/${{ github.repository }}:node${{ matrix.node_version }}-php8.1-bullseye
-            ${{ env.REGISTRY }}/${{ github.repository }}:node${{ matrix.node_version }}-php8.1
+            ${{ github.repository }}:node${{ matrix.node_version }}-php8.2-bullseye
+            ${{ github.repository }}:node${{ matrix.node_version }}-php8
+            ${{ github.repository }}:node${{ matrix.node_version }}-php8.2
+            ${{ env.REGISTRY }}/${{ github.repository }}:node${{ matrix.node_version }}-php8.2-bullseye
+            ${{ env.REGISTRY }}/${{ github.repository }}:node${{ matrix.node_version }}-php8
+            ${{ env.REGISTRY }}/${{ github.repository }}:node${{ matrix.node_version }}-php8.2
           labels: ${{ steps.meta.outputs.labels }}
           platforms: linux/amd64,linux/arm64/v8
-          #cache-from: type=registry,ref=ref=${{ env.REGISTRY }}/${{ github.repository }}:node14-php8.1-bullseye
+
+      - name: Push latest
+        if: (matrix.node_version == '18') && (github.event_name != 'pull_request')
+        run: |
+          docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:node${{ matrix.node_version }}-php8
+          docker tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:node${{ matrix.node_version }}-php8 ${{ env.IMAGE_NAME }}:latest
+          docker tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:node${{ matrix.node_version }}-php8 ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+          docker push ${{ env.IMAGE_NAME }}:latest
+          docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest

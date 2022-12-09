@@ -11,13 +11,16 @@ Serverless deployer images to run in Gitlab CI to deploy to AWS environment.
 
 ## Supported Tags
 
-* Node 18 LTS & PHP 8.1: `latest`, `node18-php8`, `node18-php8.1`, `node18-php8.1-bullseye`
+* Node 18 LTS & PHP 8.2: `latest`, `node18-php8`, `node18-php8.2`, `node18-php8.2-bullseye`
+* Node 18 LTS & PHP 8.1: `node18-php8.1`, `node18-php8.1-bullseye`
 * Node 18 LTS & PHP 8.0: `node18-php8.0`, `node18-php8.0-bullseye`
 * Node 18 & PHP 7.4: `node18-php7`, `node18-php7.4`, `node18-php7.4-bullseye`
-* Node 16 LTS & PHP 8.1: `node16-php8`, `node16-php8.1`, `node16-php8.1-bullseye`
+* Node 16 LTS & PHP 8.2: `node16-php8`, `node16-php8.2`, `node16-php8.2-bullseye`
+* Node 16 LTS & PHP 8.1: `node16-php8.1`, `node16-php8.1-bullseye`
 * Node 16 LTS & PHP 8.0: `node16-php8.0`, `node16-php8.0-bullseye`
 * Node 16 LTS & PHP 7.4: `node16-php7`, `node16-php7.4`, `node16-php7.4-bullseye`
-* Node 14 LTS & PHP 8.1: `node14-php8`, `node14-php8.1`, `node14-php8.1-bullseye`
+* Node 14 LTS & PHP 8.1: `node14-php8`, `node14-php8.2`, `node14-php8.2-bullseye`
+* Node 14 LTS & PHP 8.1: `node14-php8.1`, `node14-php8.1-bullseye`
 * Node 14 LTS & PHP 8.0: `node14-php8.0`, `node14-php8.0-bullseye`
 * Node 14 LTS & PHP 7.4: `node14-php7`, `node14-php7.4`, `node14-php7.4-bullseye`
 
